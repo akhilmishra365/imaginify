@@ -26,6 +26,8 @@ import { useState, useTransition } from "react"
 import { Value } from "@radix-ui/react-select"
 import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils"
 import { set } from "mongoose"
+import MediaUploader from "./MediaUploader"
+import TransformedImage from "./TransformedImage"
   
 
 
@@ -200,7 +202,32 @@ const TransformationForm = ({action, data = null  , userId , type , creditBalanc
     />
     )}
     </div>
-    )}
+            )}
+            <div className="media-uploader-field">
+          <CustomField 
+            control={form.control}
+            name="publicId"
+            className="flex size-full flex-col"
+            render={({ field }) => (
+              <MediaUploader
+                onValueChange={field.onChange}
+                setImage={setImage}
+                publicId={field.value}
+                image={image}
+                type={type}
+              />
+            )}
+          />
+
+          <TransformedImage 
+            image={image}
+            type={type}
+            title={form.getValues().title}
+            isTransforming={isTransforming}
+            setIsTransforming={setIsTransforming}
+            transformationConfig={transformationconfig}
+          />
+        </div>
     <div className="flex flex-col gap-4">
     <Button type="button"
     className="submit-button capitalize"
