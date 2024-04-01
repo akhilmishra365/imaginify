@@ -9,6 +9,8 @@ const Layout = ({children}:{children :React.ReactNode}) => {
     <main className='root'>
       <Sidebar/>
       <MobileNav/>
+
+
         
         <div className='root-container'>
 

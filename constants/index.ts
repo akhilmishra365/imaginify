@@ -39,6 +39,12 @@ export const navLinks = [
       route: "/credits",
       icon: "/assets/icons/bag.svg",
     },
+    // {
+    //   label: "Contact Us",
+    //   route: "/contacts",
+    //   icon: "/assets/icons/logout.svg",
+    // },
+    
   ];
   
   export const plans = [
