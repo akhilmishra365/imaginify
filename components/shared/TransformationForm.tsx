@@ -22,7 +22,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-import { useState, useTransition } from "react"
+import { useEffect, useState, useTransition } from "react"
 import { Value } from "@radix-ui/react-select"
 import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils"
 import { set } from "mongoose"
@@ -33,6 +33,7 @@ import { getCldImageUrl } from "next-cloudinary"
 import Router from "next/router"
 import { useRouter } from "next/navigation"
 import { addImage, updateImage } from "@/lib/actions/image.actions"
+import { InsufficientCreditsModal } from "./InsufficientCreditsModal"
   
 
 
@@ -194,19 +195,24 @@ const TransformationForm = ({action, data = null  , userId , type , creditBalanc
           setTransformationConfig(deepMergeObjects(newTransformation,transformationConfig))
           setNewTransformation(null)
           startTransition(async () => {
-            await updateCredits(userId, -1)
+            await updateCredits(userId, creditFee)
           })
 
 
         }
 
 
-
+        useEffect(() => {
+          if(image && (type === 'restore' || type === 'removeBackground')) {
+            setNewTransformation(transformationType.config)
+          }
+        }, [image, transformationType.config, type])
 
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        {creditBalance <Math.abs(creditFee) && <InsufficientCreditsModal/>}
          <CustomField 
             control={form.control}
             name="title"
