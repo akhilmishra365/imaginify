@@ -25,7 +25,6 @@
 3. 🔋 [Features](#features)
 4. 🔗 [Links](#links)
 
-
 ## 🚨 Tutorial
 
 <img src="https://github.com/sujatagunale/EasyRead/assets/151519281/1736fca5-a031-4854-8c09-bc110e3bc16d" />
